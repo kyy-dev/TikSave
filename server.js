@@ -418,6 +418,8 @@ function createServer({ api = Tiktok } = {}) {
   });
 }
 
+const server = createServer();
+
 if (require.main === module) {
   const port = Number(process.env.PORT || 3000);
   const host = process.env.HOST || "127.0.0.1";
@@ -425,10 +427,10 @@ if (require.main === module) {
     console.error("PORT harus berupa angka antara 1 dan 65535.");
     process.exitCode = 1;
   } else {
-    createServer().listen(port, host, () => {
+    server.listen(port, host, () => {
       console.log(`TikSave tersedia di http://${host}:${port}`);
     });
   }
 }
 
-module.exports = { createServer, runFeature };
+module.exports = Object.assign(server, { createServer, runFeature });

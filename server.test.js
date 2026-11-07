@@ -1,11 +1,26 @@
 const assert = require("node:assert/strict");
 const { after, before, test } = require("node:test");
-const { createServer } = require("./server");
+const app = require("./server");
+const { createServer } = app;
 
 let server;
 let baseUrl;
 const calls = [];
 let downloaderResult = { status: "success", result: { ok: true } };
+
+test("exports an HTTP server for Vercel", async () => {
+  assert.equal(typeof app.listen, "function");
+  await new Promise((resolve) => app.listen(0, "127.0.0.1", resolve));
+  try {
+    const response = await fetch(`http://127.0.0.1:${app.address().port}`);
+    assert.equal(response.status, 200);
+    assert.match(await response.text(), /TikSave/);
+  } finally {
+    await new Promise((resolve, reject) =>
+      app.close((error) => (error ? reject(error) : resolve())),
+    );
+  }
+});
 
 const mockApi = Object.fromEntries(
   [
