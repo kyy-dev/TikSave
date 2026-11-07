@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f2ec">
+    <title>TikSave | Alat TikTok di browser</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="TikSave, halaman utama">TikSave<span>.</span></a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">
+        <span class="theme-label">Mode gelap</span>
+      </button>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">RUANG KERJA TIKTOK</p>
+        <h1 id="page-title">Simpan, cari, dan jelajahi.</h1>
+        <p class="intro-copy">Pilih alat, masukkan tautan atau nama akun, lalu lihat hasilnya di sini.</p>
+      </section>
+
+      <section class="workspace" aria-label="Alat TikTok">
+        <form id="tool-form" class="tool-panel">
+          <div class="section-heading">
+            <div>
+              <p class="step-label">ALAT</p>
+              <h2>Mulai dari fitur</h2>
+            </div>
+            <span class="section-index">01</span>
+          </div>
+
+          <label class="field-label" for="action">Pilih fitur</label>
+          <select id="action" name="action">
+            <optgroup label="Utama · Download">
+              <option value="download">Video, foto, atau lagu</option>
+            </optgroup>
+            <optgroup label="Opsional · Coming soon">
+              <option value="search">Cari akun, live, atau video · Coming soon</option>
+              <option value="stalk">Lihat profil akun · Coming soon</option>
+              <option value="comments">Baca komentar video · Coming soon</option>
+              <option value="posts">Lihat postingan akun · Coming soon</option>
+              <option value="reposts">Lihat repost akun · Coming soon</option>
+              <option value="liked">Lihat video yang disukai · Coming soon</option>
+              <option value="collection">Buka koleksi · Coming soon</option>
+              <option value="playlist">Buka playlist · Coming soon</option>
+              <option value="trending">Lihat konten trending · Coming soon</option>
+              <option value="trending-creators">Lihat kreator trending · Coming soon</option>
+              <option value="music-videos">Cari video dari musik · Coming soon</option>
+              <option value="music-detail">Lihat detail musik · Coming soon</option>
+            </optgroup>
+          </select>
+
+          <p class="tool-description" id="tool-description"></p>
+          <p class="coming-soon-note" id="coming-soon-note" hidden>
+            Coming soon: fitur opsional masih disempurnakan. Pilihan API download tetap tersedia.
+          </p>
+          <div class="dynamic-fields" id="dynamic-fields"></div>
+          <div class="download-settings" id="download-settings">
+            <label class="field-label" for="download-version">Pilihan API download</label>
+            <select id="download-version" name="version">
+              <option value="v1">TikTok API</option>
+              <option value="v2">SSSTik</option>
+              <option value="v3">MusicalDown</option>
+            </select>
+          </div>
+
+          <details class="advanced-options">
+            <summary>Pengaturan koneksi</summary>
+            <label class="checkbox-label original-response" for="original-response">
+              <input id="original-response" name="showOriginalResponse" type="checkbox">
+              Sertakan respons asli (TikTok API)
+            </label>
+            <div class="field-wrap">
+              <label class="field-label" for="proxy">Proxy (opsional)</label>
+              <input id="proxy" name="proxy" type="text" inputmode="url" autocomplete="off" placeholder="http://proxy:port">
+              <span class="field-help">Alamat proxy hanya dipakai untuk permintaan ini.</span>
+            </div>
+          </details>
+
+          <div class="form-actions">
+            <button class="primary-button" id="submit-button" type="submit">Jalankan fitur</button>
+            <button class="quiet-button" id="clear-button" type="button">Bersihkan</button>
+          </div>
+          <p class="privacy-note">Cookie TikTok hanya dipakai saat permintaan berlangsung dan tidak disimpan oleh TikSave.</p>
+        </form>
+
+        <section class="result-panel" aria-labelledby="result-title">
+          <div class="section-heading result-heading">
+            <div>
+              <p class="step-label">HASIL</p>
+              <h2 id="result-title">Ruang hasil</h2>
+            </div>
+            <button class="quiet-button copy-button" id="copy-button" type="button" disabled>Salin JSON</button>
+          </div>
+          <div class="result-content" id="result-content" aria-live="polite" aria-busy="false">
+            <div class="empty-state">
+              <span class="empty-mark" aria-hidden="true">01</span>
+              <p>Hasil belum ada.</p>
+              <span>Pilih fitur dan jalankan permintaan untuk mulai.</span>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>TikSave</span>
+      <a href="/credits">Kredit dan ucapan terima kasih</a>
+    </footer>
+  </body>
+</html>

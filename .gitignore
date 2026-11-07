@@ -1,0 +1,11 @@
+node_modules/
+
+/AGENTS.md
+/CLAUDE.md
+/GEMINI.md
+/.agents/skills/antislop*/
+/.claude/skills/antislop*/
+/.cline/skills/antislop*/
+/.cursor/skills/antislop*/
+/.gemini/skills/antislop*/
+/.opencode/skills/antislop*/
