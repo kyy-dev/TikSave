@@ -17,6 +17,7 @@ const staticFiles = new Map([
   ["/app.js", ["app.js", "text/javascript; charset=utf-8"]],
   ["/credits.js", ["credits.js", "text/javascript; charset=utf-8"]],
   ["/styles.css", ["styles.css", "text/css; charset=utf-8"]],
+  ["/ads.txt", ["ads.txt", "text/plain; charset=utf-8"]],
 ]);
 
 class RequestError extends Error {
@@ -363,7 +364,7 @@ function createServer({ api = Tiktok } = {}) {
           "content-type": file[1],
           "cache-control": "no-cache",
           "content-security-policy":
-            "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https: data:; connect-src 'self'; media-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
+            "default-src 'self'; script-src 'self' https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; style-src 'self'; img-src 'self' https: data:; connect-src 'self' https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
           "referrer-policy": "no-referrer",
           "x-content-type-options": "nosniff",
         });

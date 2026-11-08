@@ -62,9 +62,22 @@ after(async () => {
 
 test("serves the website shell", async () => {
   const response = await fetch(baseUrl);
+  const html = await response.text();
   assert.equal(response.status, 200);
-  assert.match(await response.text(), /TikSave/);
-  assert.equal(response.headers.get("content-security-policy") !== null, true);
+  assert.match(html, /TikSave/);
+  assert.match(html, /google-adsense-account.*ca-pub-1733536931464613/);
+  assert.match(html, /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/);
+  assert.match(response.headers.get("content-security-policy"), /pagead2\.googlesyndication\.com/);
+});
+
+test("serves the AdSense ads.txt declaration", async () => {
+  const response = await fetch(`${baseUrl}/ads.txt`);
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type"), /^text\/plain/);
+  assert.equal(
+    (await response.text()).trim(),
+    "google.com, pub-1733536931464613, DIRECT, f08c47fec0942fa0",
+  );
 });
 
 test("returns successful plain-text health checks for API GET and POST", async () => {
@@ -82,6 +95,8 @@ test("serves the credits page with upstream project attribution", async () => {
 
   assert.equal(response.status, 200);
   assert.match(html, /Kredit dan ucapan terima kasih/);
+  assert.match(html, /google-adsense-account.*ca-pub-1733536931464613/);
+  assert.match(html, /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/);
   assert.match(html, /TobyG74\/tiktok-api-dl/);
   assert.match(html, /SSSTik/);
   assert.match(html, /MusicalDown/);
